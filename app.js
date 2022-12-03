@@ -19,7 +19,7 @@ const userRoutes = require('./routes/users');
 const connectDB = require('./config/db');
 
 
-DotEnv.config({path:"./config/config.env"});
+DotEnv.config({ path: "./config/config.env" });
 
 
 const app = express()
@@ -30,34 +30,34 @@ debug('connected to database')
 
 require('./config/passport');
 //* Statics
-app.use(express.static(path.join(__dirname,"public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 
 //* logger
-if(process.env.NODE_ENV === "develpment"){
+if (process.env.NODE_ENV === "develpment") {
     app.use(morgan("dev"));
 }
 
 //* View engine
 app.use(expressLayout);
-app.set("layout","./layouts/mainLayout")
-app.set("view engine","ejs");
-app.set("views","views");
+app.set("layout", "./layouts/mainlayout")
+app.set("view engine", "ejs");
+app.set("views", "views");
 
 //*bodyParser
-app.use(express.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
 app.use(bodyParser.json());
 
 //* session
 app.use(session({
-    secret:"secret",
-    resave:false,
-    saveUninitialized:false,
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
     store: MongoStore.create({
         mongoUrl: process.env.DataBaseURL,
-      })
-})
-);
+    })
+}));
 
 //* passport
 app.use(passport.initialize());
@@ -67,15 +67,15 @@ app.use(passport.session());
 app.use(flash());
 
 //*Routes
-app.use("/users",userRoutes);
-app.use("/dashboard",dashRoutes);
+app.use("/users", userRoutes);
+app.use("/dashboard", dashRoutes);
 app.use(indexRoutes);
 
 //* 404 Page
-app.use((req,res)=>{
-    res.render("404",{pageTitle:"صفحه پیدا نشد|404",path:"404"});
+app.use((req, res) => {
+    res.render("404", { pageTitle: "صفحه پیدا نشد|404", path: "404" });
 })
 
 const PORT = process.env.PORT
 
-app.listen(PORT,()=>{console.log(`Server is running in ${process.env.NODE_ENV} mode on port ${PORT}`)})
+app.listen(PORT, () => { console.log(`Server is running in ${process.env.NODE_ENV} mode on port ${PORT}`) })

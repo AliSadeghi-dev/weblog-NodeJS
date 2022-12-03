@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,15 +12,19 @@
     <% if(path==="/login" || path === "/register"){ %>
         <link rel="stylesheet" href="/css/login.css">
         <script src="https://www.google.com/recaptcha/api.js?hl=fa" async defer></script>
-    <% } %>  
-    <% if(path==="404" ){ %>
-        <link rel="stylesheet" href="/css/404.css">
-    <% } %>
-    <title><%= pageTitle %> </title>
+        <% } %>
+            <% if(path==="404" ){ %>
+                <link rel="stylesheet" href="/css/404.css">
+                <% } %>
+                    <title>
+                        <%= pageTitle %>
+                    </title>
 </head>
+
 <body class="rtl">
-    <%- body  %> 
-    <script src="/js/jquery.slim.min.js"></script>
-    <script src="/js/bootstrap.bundle.min.js"></script>
+    <%- body  %>
+        <script src="/js/jquery.slim.min.js"></script>
+        <script src="/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
